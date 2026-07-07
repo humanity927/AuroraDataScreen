@@ -1,6 +1,7 @@
 import type {
   DashboardOverview,
   EquipmentStatusItem,
+  HubNode,
   InternshipProgress,
   ProductionTrendPoint,
   QualityAnalysisItem,
@@ -73,6 +74,73 @@ export const qualityAnalysis: QualityAnalysisItem[] = [
   { label: 'B线', passRate: 96.9, defects: 26, rework: 15 },
   { label: 'C线', passRate: 97.6, defects: 21, rework: 12 },
   { label: 'D线', passRate: 95.8, defects: 34, rework: 19 },
+];
+
+export const hubNodes: HubNode[] = [
+  {
+    id: 'production-plan',
+    name: '生产计划',
+    value: 92,
+    coord: [50, 14],
+    status: 'normal',
+    description: '今日生产节拍与计划排程保持稳定',
+  },
+  {
+    id: 'assembly-line',
+    name: '产线装配',
+    value: 88,
+    coord: [76, 26],
+    status: 'normal',
+    description: '装配线产能持续高位运行',
+  },
+  {
+    id: 'equipment-monitor',
+    name: '设备监测',
+    value: 84,
+    coord: [84, 54],
+    status: 'normal',
+    description: '关键设备在线率维持在安全区间',
+  },
+  {
+    id: 'quality-check',
+    name: '质量检测',
+    value: 78,
+    coord: [70, 82],
+    status: 'warning',
+    description: 'B线检测工位需要持续关注',
+  },
+  {
+    id: 'internship-task',
+    name: '实习任务',
+    value: 82,
+    coord: [50, 90],
+    status: 'normal',
+    description: '实习小组任务推进整体良好',
+  },
+  {
+    id: 'alert-center',
+    name: '告警中心',
+    value: 62,
+    coord: [28, 78],
+    status: 'danger',
+    description: '存在少量异常告警待处理',
+  },
+  {
+    id: 'data-service',
+    name: '数据服务',
+    value: 86,
+    coord: [17, 50],
+    status: 'normal',
+    description: '数据采集与看板服务运行正常',
+  },
+  {
+    id: 'finished-storage',
+    name: '成品入库',
+    value: 74,
+    coord: [25, 24],
+    status: 'maintenance',
+    description: '入库扫码设备处于例行维护窗口',
+  },
 ];
 
 export const internshipProgress: InternshipProgress = {

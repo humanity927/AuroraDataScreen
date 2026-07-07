@@ -5,8 +5,10 @@ test('renders AuroraDataScreen dashboard', async ({ page }) => {
 
   await expect(page.getByRole('heading', { name: '极光数据大屏' })).toBeVisible();
   await expect(page.getByText('AuroraDataScreen')).toBeVisible();
+  await expect(page.getByText('极光智造中枢')).toBeVisible();
   await expect(page.getByTestId('overview-metrics')).toBeVisible();
   await expect(page.getByTestId('metric-card')).toHaveCount(4);
+  await expect(page.getByTestId('aurora-hub-chart')).toBeVisible();
   await expect(page.getByTestId('echarts-chart').first()).toBeVisible();
   await expect(page.locator('canvas').first()).toBeVisible();
 });

@@ -8,31 +8,36 @@ import { computed } from 'vue';
 
 import BaseChart from '@/components/charts/BaseChart.vue';
 import type { ProductionTrendPoint } from '@/types/dashboard';
+import { auroraChartColors, auroraTooltip } from '@/utils/chartTheme';
 
 const props = defineProps<{
   data: ProductionTrendPoint[];
 }>();
 
 const chartOption = computed<EChartsOption>(() => ({
-  color: ['#22d3ee', '#a78bfa'],
-  grid: { top: 28, right: 18, bottom: 28, left: 44 },
-  tooltip: { trigger: 'axis', backgroundColor: 'rgba(7, 16, 34, 0.92)', borderColor: '#22d3ee' },
+  color: [auroraChartColors.cyan, auroraChartColors.violet],
+  grid: { top: 32, right: 18, bottom: 28, left: 44 },
+  tooltip: { ...auroraTooltip, trigger: 'axis' },
   legend: {
     top: 0,
     right: 4,
-    textStyle: { color: '#b8d8f8' },
+    icon: 'roundRect',
+    itemWidth: 14,
+    itemHeight: 7,
+    textStyle: { color: auroraChartColors.text, fontSize: 12 },
   },
   xAxis: {
     type: 'category',
     boundaryGap: false,
     data: props.data.map((item) => item.date),
-    axisLabel: { color: '#8fb6d8' },
-    axisLine: { lineStyle: { color: 'rgba(148, 163, 184, 0.25)' } },
+    axisLabel: { color: auroraChartColors.muted },
+    axisTick: { show: false },
+    axisLine: { lineStyle: { color: 'rgba(125, 211, 252, 0.26)' } },
   },
   yAxis: {
     type: 'value',
-    axisLabel: { color: '#8fb6d8' },
-    splitLine: { lineStyle: { color: 'rgba(148, 163, 184, 0.12)' } },
+    axisLabel: { color: auroraChartColors.muted },
+    splitLine: { lineStyle: { color: auroraChartColors.grid } },
   },
   series: [
     {
@@ -40,6 +45,11 @@ const chartOption = computed<EChartsOption>(() => ({
       type: 'line',
       smooth: true,
       symbolSize: 7,
+      lineStyle: {
+        width: 3,
+        shadowColor: 'rgba(34, 211, 238, 0.46)',
+        shadowBlur: 12,
+      },
       areaStyle: {
         color: {
           type: 'linear',
@@ -48,7 +58,7 @@ const chartOption = computed<EChartsOption>(() => ({
           x2: 0,
           y2: 1,
           colorStops: [
-            { offset: 0, color: 'rgba(34, 211, 238, 0.34)' },
+            { offset: 0, color: 'rgba(34, 211, 238, 0.38)' },
             { offset: 1, color: 'rgba(34, 211, 238, 0)' },
           ],
         },
@@ -61,7 +71,7 @@ const chartOption = computed<EChartsOption>(() => ({
       smooth: true,
       symbol: 'circle',
       symbolSize: 6,
-      lineStyle: { type: 'dashed' },
+      lineStyle: { type: 'dashed', width: 2 },
       data: props.data.map((item) => item.target),
     },
   ],

@@ -1,6 +1,11 @@
 <template>
   <ul class="event-list" data-testid="realtime-events">
-    <li v-for="event in events" :key="event.id" class="event-item" :class="event.status">
+    <li
+      v-for="event in events"
+      :key="event.id"
+      class="event-item"
+      :class="[event.status, event.type]"
+    >
       <span class="event-time">{{ event.time }}</span>
       <span class="event-type">{{ event.type }}</span>
       <span class="event-content">{{ event.content }}</span>
@@ -37,9 +42,10 @@ defineProps<{
   min-width: 0;
   padding: 9px 10px;
   color: #cfefff;
-  border: 1px solid rgba(148, 163, 184, 0.12);
+  border: 1px solid rgba(125, 211, 252, 0.14);
   border-radius: 8px;
-  background: rgba(15, 23, 42, 0.54);
+  background:
+    linear-gradient(90deg, rgba(34, 211, 238, 0.06), transparent 58%), rgba(15, 23, 42, 0.54);
 }
 
 .event-time {
@@ -55,7 +61,10 @@ defineProps<{
 }
 
 .event-type {
+  padding: 3px 6px;
   color: #f0fdff;
+  border-radius: 999px;
+  background: rgba(34, 211, 238, 0.11);
 }
 
 .event-content {
@@ -77,5 +86,19 @@ defineProps<{
 
 .event-item.告警 .event-status {
   color: #fb7185;
+}
+
+.event-item.告警 {
+  border-color: rgba(251, 113, 133, 0.24);
+  background:
+    linear-gradient(90deg, rgba(251, 113, 133, 0.12), transparent 62%), rgba(15, 23, 42, 0.58);
+}
+
+.event-item.实习 .event-type {
+  background: rgba(167, 139, 250, 0.14);
+}
+
+.event-item.设备 .event-type {
+  background: rgba(251, 191, 36, 0.12);
 }
 </style>

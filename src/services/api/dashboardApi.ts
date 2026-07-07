@@ -19,6 +19,10 @@ export const apiDashboardProvider: DashboardDataProvider = {
     const { data } = await httpClient.get('/dashboard/quality-analysis');
     return data;
   },
+  async getHubNodes() {
+    const { data } = await httpClient.get('/dashboard/hub-nodes');
+    return data;
+  },
   async getInternshipProgress() {
     const { data } = await httpClient.get('/dashboard/internship-progress');
     return data;

@@ -3,6 +3,7 @@ import { describe, expect, it } from 'vitest';
 import {
   getDashboardOverview,
   getEquipmentStatus,
+  getHubNodes,
   getProductionTrend,
 } from '@/services/dashboardService';
 
@@ -20,5 +21,13 @@ describe('dashboard service', () => {
 
     expect(trend.length).toBeGreaterThanOrEqual(7);
     expect(equipment.some((item) => item.name === '运行')).toBe(true);
+  });
+
+  it('returns aurora hub nodes through the service layer', async () => {
+    const hubNodes = await getHubNodes();
+
+    expect(hubNodes).toHaveLength(8);
+    expect(hubNodes.some((node) => node.name === '生产计划')).toBe(true);
+    expect(hubNodes.every((node) => Array.isArray(node.coord))).toBe(true);
   });
 });

@@ -34,6 +34,15 @@ export interface QualityAnalysisItem {
   rework: number;
 }
 
+export interface HubNode {
+  id: string;
+  name: string;
+  value: number;
+  coord: [number, number];
+  status: 'normal' | 'warning' | 'danger' | 'maintenance';
+  description: string;
+}
+
 export interface InternshipTask {
   id: string;
   title: string;

@@ -4,7 +4,7 @@
 
 html {
   min-width: 320px;
-  background: #06111f;
+  background: var(--screen-bg);
 }
 
 body {
@@ -12,7 +12,8 @@ body {
   min-height: 100vh;
   margin: 0;
   font-family: Inter, 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', Arial, sans-serif;
-  background: #06111f;
+  background: var(--screen-bg);
+  overscroll-behavior: none;
 }
 
 button,
@@ -29,5 +30,5 @@ select {
 
 ::-webkit-scrollbar-thumb {
   border-radius: 999px;
-  background: rgba(103, 232, 249, 0.28);
+  background: linear-gradient(180deg, rgba(34, 211, 238, 0.42), rgba(167, 139, 250, 0.34));
 }

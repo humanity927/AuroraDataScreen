@@ -4,6 +4,7 @@ import { dashboardService } from '@/services/dashboardService';
 import type {
   DashboardOverview,
   EquipmentStatusItem,
+  HubNode,
   InternshipProgress,
   ProductionTrendPoint,
   QualityAnalysisItem,
@@ -19,6 +20,7 @@ interface DashboardState {
   productionTrend: ProductionTrendPoint[];
   equipmentStatus: EquipmentStatusItem[];
   qualityAnalysis: QualityAnalysisItem[];
+  hubNodes: HubNode[];
   internshipProgress: InternshipProgress | null;
   realtimeEvents: RealtimeEvent[];
   workshopLines: WorkshopLine[];
@@ -32,6 +34,7 @@ export const useDashboardStore = defineStore('dashboard', {
     productionTrend: [],
     equipmentStatus: [],
     qualityAnalysis: [],
+    hubNodes: [],
     internshipProgress: null,
     realtimeEvents: [],
     workshopLines: [],
@@ -48,6 +51,7 @@ export const useDashboardStore = defineStore('dashboard', {
           productionTrend,
           equipmentStatus,
           qualityAnalysis,
+          hubNodes,
           internshipProgress,
           realtimeEvents,
           workshopLines,
@@ -56,6 +60,7 @@ export const useDashboardStore = defineStore('dashboard', {
           dashboardService.getProductionTrend(),
           dashboardService.getEquipmentStatus(),
           dashboardService.getQualityAnalysis(),
+          dashboardService.getHubNodes(),
           dashboardService.getInternshipProgress(),
           dashboardService.getRealtimeEvents(),
           dashboardService.getWorkshopLines(),
@@ -65,6 +70,7 @@ export const useDashboardStore = defineStore('dashboard', {
         this.productionTrend = productionTrend;
         this.equipmentStatus = equipmentStatus;
         this.qualityAnalysis = qualityAnalysis;
+        this.hubNodes = hubNodes;
         this.internshipProgress = internshipProgress;
         this.realtimeEvents = realtimeEvents;
         this.workshopLines = workshopLines;

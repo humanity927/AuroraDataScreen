@@ -23,24 +23,44 @@ defineProps<{
   min-width: 0;
   min-height: 0;
   overflow: hidden;
-  border: 1px solid rgba(86, 232, 255, 0.18);
+  border: 1px solid var(--panel-border);
   border-radius: 8px;
   background:
-    linear-gradient(135deg, rgba(11, 30, 54, 0.82), rgba(18, 21, 54, 0.78)), rgba(6, 15, 30, 0.82);
+    linear-gradient(135deg, rgba(10, 30, 54, 0.9), rgba(17, 19, 52, 0.82)),
+    radial-gradient(circle at top right, rgba(34, 211, 238, 0.1), transparent 36%), var(--panel-bg);
   box-shadow:
-    0 0 24px rgba(35, 221, 255, 0.08),
-    inset 0 0 28px rgba(91, 119, 255, 0.08);
+    var(--shadow-cyan),
+    var(--shadow-violet),
+    inset 0 0 28px rgba(91, 119, 255, 0.1);
 }
 
 .screen-panel::before {
   position: absolute;
   top: 0;
-  left: 16px;
-  width: 54px;
+  left: 18px;
+  width: 72px;
   height: 2px;
   content: '';
-  background: linear-gradient(90deg, #67e8f9, #a78bfa);
+  background: linear-gradient(90deg, var(--aurora-cyan), var(--aurora-teal), var(--aurora-violet));
   box-shadow: 0 0 14px rgba(103, 232, 249, 0.75);
+}
+
+.screen-panel::after {
+  position: absolute;
+  inset: 8px;
+  pointer-events: none;
+  content: '';
+  border-radius: 6px;
+  background:
+    linear-gradient(var(--aurora-cyan), var(--aurora-cyan)) top left / 18px 1px no-repeat,
+    linear-gradient(var(--aurora-cyan), var(--aurora-cyan)) top left / 1px 18px no-repeat,
+    linear-gradient(var(--aurora-violet), var(--aurora-violet)) top right / 18px 1px no-repeat,
+    linear-gradient(var(--aurora-violet), var(--aurora-violet)) top right / 1px 18px no-repeat,
+    linear-gradient(var(--aurora-teal), var(--aurora-teal)) bottom left / 18px 1px no-repeat,
+    linear-gradient(var(--aurora-teal), var(--aurora-teal)) bottom left / 1px 18px no-repeat,
+    linear-gradient(var(--aurora-ice), var(--aurora-ice)) bottom right / 18px 1px no-repeat,
+    linear-gradient(var(--aurora-ice), var(--aurora-ice)) bottom right / 1px 18px no-repeat;
+  opacity: 0.44;
 }
 
 .panel-header {
@@ -50,22 +70,26 @@ defineProps<{
   gap: 12px;
   height: 40px;
   padding: 0 16px;
-  border-bottom: 1px solid rgba(148, 163, 184, 0.12);
+  border-bottom: 1px solid rgba(125, 211, 252, 0.14);
+  background: linear-gradient(90deg, rgba(34, 211, 238, 0.08), transparent 62%);
 }
 
 .panel-title {
-  color: #e0faff;
+  color: var(--text-primary);
   font-size: 15px;
   font-weight: 700;
   letter-spacing: 0;
+  text-shadow: 0 0 12px rgba(34, 211, 238, 0.42);
 }
 
 .panel-subtitle {
-  color: #8bd8ff;
+  color: var(--aurora-ice);
   font-size: 12px;
 }
 
 .panel-body {
+  position: relative;
+  z-index: 1;
   height: calc(100% - 40px);
   min-height: 0;
   padding: 14px;

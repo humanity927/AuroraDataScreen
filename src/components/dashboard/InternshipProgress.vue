@@ -44,10 +44,12 @@ defineProps<{
   align-items: center;
   justify-content: space-between;
   padding: 12px;
-  color: #bdefff;
-  border: 1px solid rgba(94, 234, 212, 0.18);
+  color: var(--text-secondary);
+  border: 1px solid rgba(94, 234, 212, 0.24);
   border-radius: 8px;
-  background: rgba(20, 184, 166, 0.08);
+  background:
+    radial-gradient(circle at top right, rgba(94, 234, 212, 0.16), transparent 40%),
+    rgba(20, 184, 166, 0.08);
 }
 
 .overall-rate strong {
@@ -68,8 +70,10 @@ defineProps<{
 .task-item {
   display: grid;
   gap: 8px;
-  padding: 10px 0;
-  border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+  padding: 10px;
+  border: 1px solid rgba(125, 211, 252, 0.1);
+  border-radius: 8px;
+  background: rgba(7, 18, 36, 0.36);
 }
 
 .task-meta,
@@ -87,7 +91,7 @@ defineProps<{
 
 .task-owner,
 .task-footer {
-  color: #8fb6d8;
+  color: var(--text-muted);
   font-size: 12px;
 }
 
@@ -99,7 +103,7 @@ defineProps<{
   height: 8px;
   overflow: hidden;
   border-radius: 999px;
-  background: rgba(148, 163, 184, 0.14);
+  background: rgba(148, 210, 255, 0.12);
 }
 
 .progress-line span {

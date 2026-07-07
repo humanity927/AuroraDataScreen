@@ -8,28 +8,43 @@ import { computed } from 'vue';
 
 import BaseChart from '@/components/charts/BaseChart.vue';
 import type { EquipmentStatusItem } from '@/types/dashboard';
+import { auroraChartColors, auroraTooltip } from '@/utils/chartTheme';
 
 const props = defineProps<{
   data: EquipmentStatusItem[];
 }>();
 
 const chartOption = computed<EChartsOption>(() => ({
-  color: ['#34d399', '#38bdf8', '#fbbf24', '#fb7185'],
-  tooltip: { trigger: 'item', backgroundColor: 'rgba(7, 16, 34, 0.92)', borderColor: '#22d3ee' },
+  color: [
+    auroraChartColors.teal,
+    auroraChartColors.ice,
+    auroraChartColors.amber,
+    auroraChartColors.rose,
+  ],
+  tooltip: { ...auroraTooltip, trigger: 'item' },
   legend: {
     bottom: 0,
-    textStyle: { color: '#b8d8f8' },
+    icon: 'roundRect',
+    itemWidth: 13,
+    itemHeight: 8,
+    textStyle: { color: auroraChartColors.text, fontSize: 12 },
   },
   series: [
     {
       name: '设备状态',
       type: 'pie',
-      radius: ['48%', '70%'],
+      radius: ['50%', '72%'],
       center: ['50%', '46%'],
       avoidLabelOverlap: true,
       label: {
-        color: '#dff7ff',
+        color: auroraChartColors.text,
         formatter: '{b}\n{c}台',
+      },
+      itemStyle: {
+        borderColor: 'rgba(7, 18, 36, 0.88)',
+        borderWidth: 2,
+        shadowBlur: 18,
+        shadowColor: 'rgba(34, 211, 238, 0.16)',
       },
       labelLine: {
         lineStyle: { color: 'rgba(226, 246, 255, 0.42)' },

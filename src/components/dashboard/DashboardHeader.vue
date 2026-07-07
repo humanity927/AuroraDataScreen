@@ -1,12 +1,13 @@
 <template>
   <header class="dashboard-header">
-    <div class="header-side">
+    <div class="header-side header-status">
       <span class="status-dot" />
       <span>{{ statusText }}</span>
     </div>
     <div class="title-block">
       <p class="english-name">AuroraDataScreen</p>
       <h1>极光数据大屏</h1>
+      <span class="title-line" />
     </div>
     <div class="header-side header-time">{{ displayTime }}</div>
   </header>
@@ -32,6 +33,16 @@ const { displayTime } = useCurrentTime();
   padding: 0 28px;
 }
 
+.dashboard-header::before {
+  position: absolute;
+  inset: 8px 22%;
+  pointer-events: none;
+  content: '';
+  border-top: 1px solid rgba(125, 211, 252, 0.18);
+  border-bottom: 1px solid rgba(52, 211, 153, 0.12);
+  transform: skewX(-16deg);
+}
+
 .dashboard-header::after {
   position: absolute;
   bottom: 6px;
@@ -39,7 +50,15 @@ const { displayTime } = useCurrentTime();
   width: 68%;
   height: 1px;
   content: '';
-  background: linear-gradient(90deg, transparent, rgba(103, 232, 249, 0.78), transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(34, 211, 238, 0.26),
+    rgba(52, 211, 153, 0.84),
+    rgba(167, 139, 250, 0.3),
+    transparent
+  );
+  box-shadow: 0 0 18px rgba(34, 211, 238, 0.38);
 }
 
 .title-block {
@@ -51,6 +70,8 @@ const { displayTime } = useCurrentTime();
   color: #80f7ff;
   font-size: 13px;
   font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
 }
 
 h1 {
@@ -61,6 +82,17 @@ h1 {
   text-shadow:
     0 0 18px rgba(34, 211, 238, 0.54),
     0 0 34px rgba(167, 139, 250, 0.28);
+}
+
+.title-line {
+  display: block;
+  width: min(420px, 68vw);
+  height: 7px;
+  margin: 3px auto 0;
+  background:
+    radial-gradient(circle, rgba(52, 211, 153, 0.72), transparent 58%) center / 8px 8px no-repeat,
+    linear-gradient(90deg, transparent, rgba(34, 211, 238, 0.78), transparent);
+  filter: drop-shadow(0 0 10px rgba(34, 211, 238, 0.55));
 }
 
 .header-side {
@@ -74,9 +106,10 @@ h1 {
   color: #bdefff;
   font-size: 14px;
   white-space: nowrap;
-  border: 1px solid rgba(103, 232, 249, 0.2);
+  border: 1px solid rgba(103, 232, 249, 0.28);
   border-radius: 8px;
-  background: rgba(12, 24, 48, 0.6);
+  background: linear-gradient(135deg, rgba(12, 32, 56, 0.74), rgba(20, 18, 52, 0.52));
+  box-shadow: inset 0 0 18px rgba(34, 211, 238, 0.1);
 }
 
 .header-time {

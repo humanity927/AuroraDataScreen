@@ -5,9 +5,18 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   --aurora-cyan: #22d3ee;
+  --aurora-ice: #7dd3fc;
   --aurora-teal: #34d399;
   --aurora-violet: #a78bfa;
+  --aurora-amber: #fbbf24;
   --aurora-rose: #fb7185;
   --screen-bg: #06111f;
   --panel-bg: rgba(7, 18, 36, 0.78);
+  --panel-border: rgba(103, 232, 249, 0.24);
+  --panel-border-strong: rgba(125, 211, 252, 0.44);
+  --text-primary: #effdff;
+  --text-secondary: #b7daf0;
+  --text-muted: #7fa5c7;
+  --shadow-cyan: 0 0 24px rgba(34, 211, 238, 0.2);
+  --shadow-violet: 0 0 28px rgba(167, 139, 250, 0.14);
 }

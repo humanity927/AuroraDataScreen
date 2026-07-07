@@ -4,6 +4,7 @@ import { logger } from '@/utils/logger';
 import {
   dashboardOverview,
   equipmentStatus,
+  hubNodes,
   internshipProgress,
   productionTrend,
   qualityAnalysis,
@@ -21,6 +22,7 @@ export const mockDashboardProvider: DashboardDataProvider = {
   getProductionTrend: () => wait(productionTrend),
   getEquipmentStatus: () => wait(equipmentStatus),
   getQualityAnalysis: () => wait(qualityAnalysis),
+  getHubNodes: () => wait(hubNodes),
   getInternshipProgress: () => wait(internshipProgress),
   getRealtimeEvents: () => wait(realtimeEvents),
   getWorkshopLines: () => wait(workshopLines),
