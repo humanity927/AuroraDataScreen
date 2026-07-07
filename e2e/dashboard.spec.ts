@@ -1,6 +1,16 @@
 import { expect, test } from '@playwright/test';
 
 test('renders AuroraDataScreen dashboard', async ({ page }) => {
+  const browserErrors: string[] = [];
+  page.on('console', (message) => {
+    if (message.type() === 'error') {
+      browserErrors.push(message.text());
+    }
+  });
+  page.on('pageerror', (error) => {
+    browserErrors.push(error.message);
+  });
+
   await page.goto('/');
 
   await expect(page.getByRole('heading', { name: '极光数据大屏' })).toBeVisible();
@@ -11,4 +21,7 @@ test('renders AuroraDataScreen dashboard', async ({ page }) => {
   await expect(page.getByTestId('aurora-hub-chart')).toBeVisible();
   await expect(page.getByTestId('echarts-chart').first()).toBeVisible();
   await expect(page.locator('canvas').first()).toBeVisible();
+  await page.waitForTimeout(2500);
+  await expect(page.getByTestId('overview-metrics')).toBeVisible();
+  expect(browserErrors).toEqual([]);
 });

@@ -1,31 +1,22 @@
 import type { DashboardDataProvider } from '@/types/service';
 import { logger } from '@/utils/logger';
 
-import {
-  dashboardOverview,
-  equipmentStatus,
-  hubNodes,
-  internshipProgress,
-  productionTrend,
-  qualityAnalysis,
-  realtimeEvents,
-  workshopLines,
-} from './dashboardMock';
+import { getRealtimeDashboardFrame } from './realtimeDashboardSimulator';
 
-const wait = <T>(data: T, delay = 120) =>
+const wait = <T>(factory: () => T, delay = 120) =>
   new Promise<T>((resolve) => {
-    window.setTimeout(() => resolve(structuredClone(data)), delay);
+    window.setTimeout(() => resolve(structuredClone(factory())), delay);
   });
 
 export const mockDashboardProvider: DashboardDataProvider = {
-  getDashboardOverview: () => wait(dashboardOverview),
-  getProductionTrend: () => wait(productionTrend),
-  getEquipmentStatus: () => wait(equipmentStatus),
-  getQualityAnalysis: () => wait(qualityAnalysis),
-  getHubNodes: () => wait(hubNodes),
-  getInternshipProgress: () => wait(internshipProgress),
-  getRealtimeEvents: () => wait(realtimeEvents),
-  getWorkshopLines: () => wait(workshopLines),
+  getDashboardOverview: () => wait(() => getRealtimeDashboardFrame().overview),
+  getProductionTrend: () => wait(() => getRealtimeDashboardFrame().productionTrend),
+  getEquipmentStatus: () => wait(() => getRealtimeDashboardFrame().equipmentStatus),
+  getQualityAnalysis: () => wait(() => getRealtimeDashboardFrame().qualityAnalysis),
+  getHubNodes: () => wait(() => getRealtimeDashboardFrame().hubNodes),
+  getInternshipProgress: () => wait(() => getRealtimeDashboardFrame().internshipProgress),
+  getRealtimeEvents: () => wait(() => getRealtimeDashboardFrame().realtimeEvents),
+  getWorkshopLines: () => wait(() => getRealtimeDashboardFrame().workshopLines),
 };
 
 logger.info('Dashboard mock provider ready');

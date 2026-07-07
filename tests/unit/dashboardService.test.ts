@@ -4,6 +4,7 @@ import {
   getDashboardOverview,
   getEquipmentStatus,
   getHubNodes,
+  getRealtimeEvents,
   getProductionTrend,
 } from '@/services/dashboardService';
 
@@ -29,5 +30,12 @@ describe('dashboard service', () => {
     expect(hubNodes).toHaveLength(8);
     expect(hubNodes.some((node) => node.name === '生产计划')).toBe(true);
     expect(hubNodes.every((node) => Array.isArray(node.coord))).toBe(true);
+  });
+
+  it('returns bounded realtime event data through the service layer', async () => {
+    const events = await getRealtimeEvents();
+
+    expect(events.length).toBeGreaterThanOrEqual(6);
+    expect(events.length).toBeLessThanOrEqual(8);
   });
 });

@@ -43,7 +43,7 @@
 
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
-import { onMounted } from 'vue';
+import { onBeforeUnmount, onMounted } from 'vue';
 
 import AuroraHubChart from '@/components/charts/AuroraHubChart.vue';
 import EquipmentStatusChart from '@/components/charts/EquipmentStatusChart.vue';
@@ -69,7 +69,11 @@ const {
 } = storeToRefs(dashboardStore);
 
 onMounted(() => {
-  void dashboardStore.loadDashboard();
+  dashboardStore.startRealtime();
+});
+
+onBeforeUnmount(() => {
+  dashboardStore.stopRealtime();
 });
 </script>
 

@@ -158,4 +158,12 @@ const displayChange = computed(() => formatChange(props.metric.change));
 .metric-change.stable {
   color: #fbbf24;
 }
+
+.metric-card.alerts .metric-change.up {
+  color: #fb7185;
+}
+
+.metric-card.alerts .metric-change.down {
+  color: #34d399;
+}
 </style>

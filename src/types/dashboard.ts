@@ -71,3 +71,15 @@ export interface WorkshopLine {
   output: number;
   onlineRate: number;
 }
+
+export interface DashboardFrame {
+  updatedAt: string;
+  overview: DashboardOverview;
+  productionTrend: ProductionTrendPoint[];
+  equipmentStatus: EquipmentStatusItem[];
+  qualityAnalysis: QualityAnalysisItem[];
+  hubNodes: HubNode[];
+  internshipProgress: InternshipProgress;
+  realtimeEvents: RealtimeEvent[];
+  workshopLines: WorkshopLine[];
+}

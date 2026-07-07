@@ -13,6 +13,9 @@ import type {
 } from '@/types/dashboard';
 import { logger } from '@/utils/logger';
 
+const REALTIME_REFRESH_INTERVAL_MS = 2000;
+let realtimeTimer: number | null = null;
+
 interface DashboardState {
   loading: boolean;
   error: string;
@@ -43,7 +46,7 @@ export const useDashboardStore = defineStore('dashboard', {
     async loadDashboard() {
       this.loading = true;
       this.error = '';
-      logger.info('Loading dashboard data');
+      logger.debug('Loading dashboard data');
 
       try {
         const [
@@ -80,6 +83,26 @@ export const useDashboardStore = defineStore('dashboard', {
       } finally {
         this.loading = false;
       }
+    },
+    startRealtime() {
+      if (realtimeTimer !== null) {
+        return;
+      }
+
+      logger.info('Starting realtime dashboard refresh');
+      void this.loadDashboard();
+      realtimeTimer = window.setInterval(() => {
+        void this.loadDashboard();
+      }, REALTIME_REFRESH_INTERVAL_MS);
+    },
+    stopRealtime() {
+      if (realtimeTimer === null) {
+        return;
+      }
+
+      logger.info('Stopping realtime dashboard refresh');
+      window.clearInterval(realtimeTimer);
+      realtimeTimer = null;
     },
   },
 });
