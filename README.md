@@ -6,17 +6,7 @@
 
 ## 效果预览
 
-### 大屏总览
-
 ![极光数据大屏总览](docs/images/dashboard-overview.png)
-
-### 极光智造中枢
-
-![极光智造中枢](docs/images/dashboard-hub.png)
-
-### 趋势与质量分析
-
-![生产趋势与质量分析](docs/images/dashboard-charts.png)
 
 ## 项目特色
 
