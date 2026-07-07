@@ -1,0 +1,13 @@
+:root {
+  color-scheme: dark;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  --aurora-cyan: #22d3ee;
+  --aurora-teal: #34d399;
+  --aurora-violet: #a78bfa;
+  --aurora-rose: #fb7185;
+  --screen-bg: #06111f;
+  --panel-bg: rgba(7, 18, 36, 0.78);
+}
