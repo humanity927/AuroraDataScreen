@@ -69,9 +69,12 @@ const displayChange = computed(() => formatChange(props.metric.change));
   border: 1px solid rgba(125, 211, 252, 0.2);
   border-radius: 8px;
   background:
-    radial-gradient(circle at top right, rgba(52, 211, 153, 0.16), transparent 42%),
-    linear-gradient(135deg, rgba(34, 211, 238, 0.08), transparent 52%), rgba(13, 26, 52, 0.72);
-  box-shadow: inset 0 0 24px rgba(34, 211, 238, 0.06);
+    linear-gradient(128deg, rgba(34, 211, 238, 0.16), transparent 42%),
+    linear-gradient(245deg, rgba(52, 211, 153, 0.13), transparent 48%),
+    rgba(13, 26, 52, 0.58);
+  box-shadow:
+    0 0 18px rgba(34, 211, 238, 0.08),
+    inset 0 0 24px rgba(34, 211, 238, 0.06);
 }
 
 .metric-card::after {
@@ -87,16 +90,35 @@ const displayChange = computed(() => formatChange(props.metric.change));
 }
 
 .metric-card.alerts {
-  border-color: rgba(251, 113, 133, 0.28);
+  border-color: rgba(253, 230, 138, 0.32);
   background:
-    radial-gradient(circle at top right, rgba(251, 113, 133, 0.14), transparent 42%),
-    linear-gradient(135deg, rgba(251, 191, 36, 0.06), transparent 52%), rgba(13, 26, 52, 0.72);
+    linear-gradient(128deg, rgba(253, 230, 138, 0.14), transparent 42%),
+    linear-gradient(245deg, rgba(165, 180, 252, 0.1), transparent 52%),
+    rgba(13, 26, 52, 0.58);
+}
+
+.metric-card.production {
+  border-color: rgba(34, 211, 238, 0.26);
+  background:
+    linear-gradient(128deg, rgba(34, 211, 238, 0.18), transparent 42%),
+    linear-gradient(245deg, rgba(52, 211, 153, 0.14), transparent 48%),
+    rgba(13, 26, 52, 0.58);
+}
+
+.metric-card.onlineRate {
+  border-color: rgba(125, 211, 252, 0.28);
+  background:
+    linear-gradient(128deg, rgba(56, 189, 248, 0.16), transparent 42%),
+    linear-gradient(245deg, rgba(165, 180, 252, 0.13), transparent 52%),
+    rgba(13, 26, 52, 0.58);
 }
 
 .metric-card.taskRate {
+  border-color: rgba(167, 139, 250, 0.3);
   background:
-    radial-gradient(circle at top right, rgba(167, 139, 250, 0.16), transparent 42%),
-    linear-gradient(135deg, rgba(34, 211, 238, 0.08), transparent 52%), rgba(13, 26, 52, 0.72);
+    linear-gradient(128deg, rgba(167, 139, 250, 0.16), transparent 42%),
+    linear-gradient(245deg, rgba(253, 230, 138, 0.1), transparent 52%),
+    rgba(13, 26, 52, 0.58);
 }
 
 .metric-icon {
@@ -106,7 +128,7 @@ const displayChange = computed(() => formatChange(props.metric.change));
   height: 50px;
   color: #9ffcff;
   border-radius: 8px;
-  background: linear-gradient(135deg, rgba(34, 211, 238, 0.18), rgba(167, 139, 250, 0.18));
+  background: linear-gradient(135deg, rgba(103, 232, 249, 0.2), rgba(165, 180, 252, 0.18), rgba(253, 230, 138, 0.1));
   box-shadow:
     0 0 18px rgba(34, 211, 238, 0.14),
     inset 0 0 16px rgba(34, 211, 238, 0.12);
@@ -120,16 +142,20 @@ const displayChange = computed(() => formatChange(props.metric.change));
 
 .metric-title {
   color: #97bad8;
+  font-family: var(--font-display);
   font-size: 13px;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .metric-value {
-  color: #f4fdff;
-  font-family: 'DIN Alternate', 'Roboto Mono', monospace;
+  color: #f7feff;
+  font-family: var(--font-number);
   font-size: clamp(24px, 2.3vw, 34px);
+  font-weight: 800;
   line-height: 1;
-  text-shadow: 0 0 18px rgba(34, 211, 238, 0.28);
+  text-shadow:
+    0 0 18px rgba(34, 211, 238, 0.32),
+    0 0 16px rgba(167, 139, 250, 0.16);
 }
 
 .metric-value small {
@@ -152,7 +178,7 @@ const displayChange = computed(() => formatChange(props.metric.change));
 }
 
 .metric-change.down {
-  color: #fb7185;
+  color: #fcd34d;
 }
 
 .metric-change.stable {
@@ -160,7 +186,7 @@ const displayChange = computed(() => formatChange(props.metric.change));
 }
 
 .metric-card.alerts .metric-change.up {
-  color: #fb7185;
+  color: #fcd34d;
 }
 
 .metric-card.alerts .metric-change.down {

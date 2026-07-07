@@ -67,21 +67,29 @@ const { displayTime } = useCurrentTime();
 
 .english-name {
   margin: 0;
-  color: #80f7ff;
+  color: #a9f7ff;
+  font-family: var(--font-display);
   font-size: 13px;
-  font-weight: 700;
+  font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.08em;
+  text-shadow: 0 0 16px rgba(34, 211, 238, 0.42);
 }
 
 h1 {
   margin: 4px 0 0;
   color: #f6feff;
+  font-family: var(--font-display);
   font-size: clamp(28px, 3vw, 42px);
+  font-weight: 900;
   letter-spacing: 0;
+  background: linear-gradient(90deg, #f8feff 0%, #bae6fd 24%, #67e8f9 42%, #a5b4fc 66%, #fde68a 100%);
+  background-clip: text;
   text-shadow:
     0 0 18px rgba(34, 211, 238, 0.54),
-    0 0 34px rgba(167, 139, 250, 0.28);
+    0 0 34px rgba(165, 180, 252, 0.32),
+    0 0 18px rgba(253, 230, 138, 0.16);
+  -webkit-text-fill-color: transparent;
 }
 
 .title-line {
@@ -90,8 +98,8 @@ h1 {
   height: 7px;
   margin: 3px auto 0;
   background:
-    radial-gradient(circle, rgba(52, 211, 153, 0.72), transparent 58%) center / 8px 8px no-repeat,
-    linear-gradient(90deg, transparent, rgba(34, 211, 238, 0.78), transparent);
+    linear-gradient(90deg, transparent, rgba(103, 232, 249, 0.86), rgba(94, 234, 212, 0.74), rgba(165, 180, 252, 0.62), transparent),
+    repeating-linear-gradient(90deg, transparent 0 38px, rgba(253, 230, 138, 0.36) 38px 40px);
   filter: drop-shadow(0 0 10px rgba(34, 211, 238, 0.55));
 }
 
@@ -104,17 +112,19 @@ h1 {
   padding: 8px 12px;
   overflow: hidden;
   color: #bdefff;
+  font-family: var(--font-display);
   font-size: 14px;
+  font-weight: 700;
   white-space: nowrap;
   border: 1px solid rgba(103, 232, 249, 0.28);
   border-radius: 8px;
-  background: linear-gradient(135deg, rgba(12, 32, 56, 0.74), rgba(20, 18, 52, 0.52));
+  background: linear-gradient(135deg, rgba(12, 32, 56, 0.78), rgba(42, 24, 68, 0.5), rgba(8, 52, 62, 0.42));
   box-shadow: inset 0 0 18px rgba(34, 211, 238, 0.1);
 }
 
 .header-time {
   justify-self: end;
-  font-family: 'DIN Alternate', 'Roboto Mono', monospace;
+  font-family: var(--font-number);
 }
 
 .status-dot {

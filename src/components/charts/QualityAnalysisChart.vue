@@ -8,14 +8,21 @@ import { computed } from 'vue';
 
 import BaseChart from '@/components/charts/BaseChart.vue';
 import type { QualityAnalysisItem } from '@/types/dashboard';
-import { auroraChartColors, auroraTooltip } from '@/utils/chartTheme';
+import {
+  auroraChartColors,
+  auroraPalette,
+  auroraTooltip,
+  getAuroraColor,
+  getAuroraLinearGradient,
+  getAuroraVerticalGradient,
+} from '@/utils/chartTheme';
 
 const props = defineProps<{
   data: QualityAnalysisItem[];
 }>();
 
 const chartOption = computed<EChartsOption>(() => ({
-  color: [auroraChartColors.teal, auroraChartColors.amber, auroraChartColors.violet],
+  color: [auroraChartColors.teal, auroraChartColors.amber, auroraChartColors.magenta],
   grid: { top: 34, right: 18, bottom: 28, left: 42 },
   tooltip: { ...auroraTooltip, trigger: 'axis' },
   legend: {
@@ -51,12 +58,17 @@ const chartOption = computed<EChartsOption>(() => ({
     {
       name: '合格率',
       type: 'bar',
-      barWidth: 16,
-      data: props.data.map((item) => item.passRate),
+      barWidth: 18,
+      data: props.data.map((item, index) => ({
+        value: item.passRate,
+        itemStyle: {
+          color: getAuroraVerticalGradient(index),
+          shadowBlur: 16,
+          shadowColor: getAuroraColor(index),
+        },
+      })),
       itemStyle: {
         borderRadius: [6, 6, 0, 0],
-        shadowBlur: 14,
-        shadowColor: 'rgba(94, 234, 212, 0.24)',
       },
     },
     {
@@ -64,6 +76,14 @@ const chartOption = computed<EChartsOption>(() => ({
       type: 'line',
       yAxisIndex: 1,
       smooth: true,
+      symbolSize: 7,
+      itemStyle: { color: auroraPalette[3], borderColor: '#fff7ed', borderWidth: 1 },
+      lineStyle: {
+        width: 3,
+        color: getAuroraLinearGradient(3),
+        shadowBlur: 10,
+        shadowColor: 'rgba(251, 191, 36, 0.28)',
+      },
       data: props.data.map((item) => item.defects),
     },
     {
@@ -71,6 +91,15 @@ const chartOption = computed<EChartsOption>(() => ({
       type: 'line',
       yAxisIndex: 1,
       smooth: true,
+      symbol: 'diamond',
+      symbolSize: 8,
+      itemStyle: { color: auroraPalette[6], borderColor: '#fdf2ff', borderWidth: 1 },
+      lineStyle: {
+        width: 3,
+        color: getAuroraLinearGradient(6),
+        shadowBlur: 10,
+        shadowColor: 'rgba(165, 180, 252, 0.28)',
+      },
       data: props.data.map((item) => item.rework),
     },
   ],

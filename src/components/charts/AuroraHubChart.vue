@@ -10,7 +10,12 @@ import { computed } from 'vue';
 
 import BaseChart from '@/components/charts/BaseChart.vue';
 import type { HubNode } from '@/types/dashboard';
-import { auroraChartColors, auroraTooltip } from '@/utils/chartTheme';
+import {
+  auroraChartColors,
+  auroraTooltip,
+  getAuroraColor,
+  getAuroraRadialGradient,
+} from '@/utils/chartTheme';
 
 const props = withDefaults(
   defineProps<{
@@ -41,7 +46,9 @@ type NodeSeriesData = {
   description: string;
   status: HubNode['status'];
   itemStyle: {
-    color: string;
+    color: Record<string, unknown>;
+    borderColor: string;
+    borderWidth: number;
     shadowColor: string;
     shadowBlur: number;
   };
@@ -63,24 +70,32 @@ const buildRingLines = (radius: number, segments = 96) =>
   });
 
 const getNodeData = computed<NodeSeriesData[]>(() =>
-  props.nodes.map((node) => ({
-    name: node.name,
-    value: [node.coord[0], node.coord[1], node.value],
-    description: node.description,
-    status: node.status,
-    itemStyle: {
-      color: statusColor[node.status],
-      shadowColor: statusColor[node.status],
-      shadowBlur: 18,
-    },
-  })),
+  props.nodes.map((node, index) => {
+    const nodeColor = getAuroraColor(index);
+
+    return {
+      name: node.name,
+      value: [node.coord[0], node.coord[1], node.value],
+      description: node.description,
+      status: node.status,
+      itemStyle: {
+        color: getAuroraRadialGradient(index),
+        borderColor: statusColor[node.status],
+        borderWidth: node.status === 'normal' ? 1 : 2,
+        shadowColor: nodeColor,
+        shadowBlur: 22,
+      },
+    };
+  }),
 );
 
 const lineData = computed(() =>
-  props.nodes.map((node) => ({
+  props.nodes.map((node, index) => ({
     coords: [centerCoord, node.coord],
     lineStyle: {
-      color: statusColor[node.status],
+      color: getAuroraColor(index),
+      shadowColor: getAuroraColor(index),
+      shadowBlur: 10,
     },
   })),
 );
@@ -136,7 +151,7 @@ const chartOption = computed<EChartsOption>(() => ({
       polyline: false,
       symbol: 'none',
       lineStyle: {
-        color: 'rgba(125, 211, 252, 0.16)',
+        color: 'rgba(165, 180, 252, 0.22)',
         width: 1,
         type: 'dashed',
       },
@@ -155,8 +170,8 @@ const chartOption = computed<EChartsOption>(() => ({
         symbolSize: 5,
       },
       lineStyle: {
-        width: 1.4,
-        opacity: 0.46,
+        width: 1.8,
+        opacity: 0.56,
         curveness: 0.18,
       },
       data: lineData.value,
@@ -178,12 +193,12 @@ const chartOption = computed<EChartsOption>(() => ({
       label: {
         show: true,
         formatter: '{b}',
-        color: '#e9fbff',
+        color: '#f4fdff',
         fontSize: 12,
-        fontWeight: 700,
+        fontWeight: 800,
         position: 'bottom',
         distance: 8,
-        textShadowBlur: 10,
+        textShadowBlur: 12,
         textShadowColor: 'rgba(34, 211, 238, 0.8)',
       },
       data: getNodeData.value,
@@ -198,13 +213,13 @@ const chartOption = computed<EChartsOption>(() => ({
         scale: 4.4,
         period: 3,
       },
-      symbolSize: 82,
+      symbolSize: 86,
       label: {
         show: true,
         formatter: '极光数据中枢',
         color: '#ffffff',
         fontSize: 16,
-        fontWeight: 800,
+        fontWeight: 900,
         textShadowBlur: 14,
         textShadowColor: auroraChartColors.cyan,
       },
@@ -215,14 +230,15 @@ const chartOption = computed<EChartsOption>(() => ({
           y: 0.5,
           r: 0.72,
           colorStops: [
-            { offset: 0, color: '#f8feff' },
-            { offset: 0.42, color: '#22d3ee' },
-            { offset: 0.74, color: '#34d399' },
-            { offset: 1, color: '#6d5dfc' },
+            { offset: 0, color: '#ffffff' },
+            { offset: 0.28, color: auroraChartColors.cyan },
+            { offset: 0.54, color: auroraChartColors.violet },
+            { offset: 0.78, color: auroraChartColors.magenta },
+            { offset: 1, color: auroraChartColors.amber },
           ],
         },
-        shadowColor: 'rgba(34, 211, 238, 0.86)',
-        shadowBlur: 40,
+        shadowColor: 'rgba(165, 180, 252, 0.72)',
+        shadowBlur: 44,
       },
       data: [{ name: '极光数据中枢', value: [50, 50, 100] }],
     },
@@ -239,9 +255,10 @@ const chartOption = computed<EChartsOption>(() => ({
   overflow: hidden;
   border-radius: 8px;
   background:
-    radial-gradient(circle at 50% 50%, rgba(34, 211, 238, 0.2), transparent 25%),
-    radial-gradient(circle at 62% 34%, rgba(52, 211, 153, 0.12), transparent 30%),
-    linear-gradient(135deg, rgba(8, 25, 48, 0.42), rgba(19, 14, 48, 0.34));
+    linear-gradient(128deg, rgba(34, 211, 238, 0.22), transparent 30%),
+    linear-gradient(236deg, rgba(165, 180, 252, 0.2), transparent 34%),
+    linear-gradient(18deg, rgba(253, 230, 138, 0.12), transparent 40%),
+    linear-gradient(135deg, rgba(8, 25, 48, 0.46), rgba(19, 14, 48, 0.36));
 }
 
 .aurora-hub-chart::before,
@@ -255,7 +272,7 @@ const chartOption = computed<EChartsOption>(() => ({
 .aurora-hub-chart::before {
   background:
     linear-gradient(90deg, transparent 0 48%, rgba(103, 232, 249, 0.12) 49% 51%, transparent 52%),
-    linear-gradient(0deg, transparent 0 48%, rgba(52, 211, 153, 0.1) 49% 51%, transparent 52%),
+    linear-gradient(0deg, transparent 0 48%, rgba(165, 180, 252, 0.1) 49% 51%, transparent 52%),
     repeating-linear-gradient(
       90deg,
       rgba(148, 210, 255, 0.06) 0,
@@ -269,13 +286,14 @@ const chartOption = computed<EChartsOption>(() => ({
 .aurora-hub-chart::after {
   background: linear-gradient(
     115deg,
-    transparent 18%,
-    rgba(34, 211, 238, 0.18) 34%,
-    rgba(52, 211, 153, 0.08) 42%,
-    rgba(167, 139, 250, 0.16) 58%,
-    transparent 76%
+    transparent 12%,
+    rgba(34, 211, 238, 0.2) 28%,
+    rgba(52, 211, 153, 0.12) 40%,
+    rgba(167, 139, 250, 0.18) 56%,
+    rgba(253, 230, 138, 0.1) 68%,
+    transparent 82%
   );
-  filter: blur(22px);
-  opacity: 0.68;
+  filter: blur(18px);
+  opacity: 0.78;
 }
 </style>

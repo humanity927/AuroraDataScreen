@@ -42,15 +42,17 @@ defineProps<{
   min-width: 0;
   padding: 9px 10px;
   color: #cfefff;
-  border: 1px solid rgba(125, 211, 252, 0.14);
+  border: 1px solid rgba(125, 211, 252, 0.16);
   border-radius: 8px;
   background:
-    linear-gradient(90deg, rgba(34, 211, 238, 0.06), transparent 58%), rgba(15, 23, 42, 0.54);
+    linear-gradient(90deg, rgba(34, 211, 238, 0.08), transparent 58%),
+    linear-gradient(270deg, rgba(165, 180, 252, 0.06), transparent 58%),
+    rgba(15, 23, 42, 0.54);
 }
 
 .event-time {
   color: #80f7ff;
-  font-family: 'Roboto Mono', monospace;
+  font-family: var(--font-number);
   font-size: 12px;
 }
 
@@ -64,13 +66,13 @@ defineProps<{
   padding: 3px 6px;
   color: #f0fdff;
   border-radius: 999px;
-  background: rgba(34, 211, 238, 0.11);
+  background: linear-gradient(90deg, rgba(34, 211, 238, 0.22), rgba(52, 211, 153, 0.14));
 }
 
 .event-content {
   min-width: 0;
   overflow: hidden;
-  color: #b9d8ed;
+  color: #c6e4f3;
   font-size: 13px;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -85,20 +87,30 @@ defineProps<{
 }
 
 .event-item.告警 .event-status {
-  color: #fb7185;
+  color: #fcd34d;
 }
 
 .event-item.告警 {
-  border-color: rgba(251, 113, 133, 0.24);
+  border-color: rgba(253, 230, 138, 0.3);
   background:
-    linear-gradient(90deg, rgba(251, 113, 133, 0.12), transparent 62%), rgba(15, 23, 42, 0.58);
+    linear-gradient(90deg, rgba(253, 230, 138, 0.14), transparent 62%),
+    linear-gradient(270deg, rgba(165, 180, 252, 0.08), transparent 62%),
+    rgba(15, 23, 42, 0.58);
 }
 
-.event-item.实习 .event-type {
-  background: rgba(167, 139, 250, 0.14);
+.event-item.生产 .event-type {
+  background: linear-gradient(90deg, rgba(34, 211, 238, 0.28), rgba(52, 211, 153, 0.16));
 }
 
 .event-item.设备 .event-type {
-  background: rgba(251, 191, 36, 0.12);
+  background: linear-gradient(90deg, rgba(253, 230, 138, 0.22), rgba(94, 234, 212, 0.12));
+}
+
+.event-item.实习 .event-type {
+  background: linear-gradient(90deg, rgba(165, 180, 252, 0.24), rgba(196, 181, 253, 0.16));
+}
+
+.event-item.告警 .event-type {
+  background: linear-gradient(90deg, rgba(253, 230, 138, 0.24), rgba(165, 180, 252, 0.12));
 }
 </style>

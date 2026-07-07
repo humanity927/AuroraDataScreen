@@ -8,14 +8,19 @@ import { computed } from 'vue';
 
 import BaseChart from '@/components/charts/BaseChart.vue';
 import type { ProductionTrendPoint } from '@/types/dashboard';
-import { auroraChartColors, auroraTooltip } from '@/utils/chartTheme';
+import {
+  auroraChartColors,
+  auroraPalette,
+  auroraTooltip,
+  getAuroraLinearGradient,
+} from '@/utils/chartTheme';
 
 const props = defineProps<{
   data: ProductionTrendPoint[];
 }>();
 
 const chartOption = computed<EChartsOption>(() => ({
-  color: [auroraChartColors.cyan, auroraChartColors.violet],
+  color: [auroraChartColors.cyan, auroraChartColors.amber, auroraChartColors.magenta],
   grid: { top: 32, right: 18, bottom: 28, left: 44 },
   tooltip: { ...auroraTooltip, trigger: 'axis' },
   legend: {
@@ -45,8 +50,14 @@ const chartOption = computed<EChartsOption>(() => ({
       type: 'line',
       smooth: true,
       symbolSize: 7,
+      itemStyle: {
+        color: auroraChartColors.cyan,
+        borderColor: '#f8feff',
+        borderWidth: 2,
+      },
       lineStyle: {
         width: 3,
+        color: getAuroraLinearGradient(0),
         shadowColor: 'rgba(34, 211, 238, 0.46)',
         shadowBlur: 12,
       },
@@ -59,6 +70,8 @@ const chartOption = computed<EChartsOption>(() => ({
           y2: 1,
           colorStops: [
             { offset: 0, color: 'rgba(34, 211, 238, 0.38)' },
+            { offset: 0.42, color: 'rgba(52, 211, 153, 0.18)' },
+            { offset: 0.74, color: 'rgba(165, 180, 252, 0.12)' },
             { offset: 1, color: 'rgba(34, 211, 238, 0)' },
           ],
         },
@@ -71,7 +84,26 @@ const chartOption = computed<EChartsOption>(() => ({
       smooth: true,
       symbol: 'circle',
       symbolSize: 6,
-      lineStyle: { type: 'dashed', width: 2 },
+      itemStyle: {
+        color: auroraChartColors.amber,
+        borderColor: auroraChartColors.violet,
+        borderWidth: 1,
+      },
+      lineStyle: {
+        type: 'dashed',
+        width: 2,
+        color: getAuroraLinearGradient(3),
+        shadowColor: 'rgba(253, 230, 138, 0.3)',
+        shadowBlur: 10,
+      },
+      markPoint: {
+        symbol: 'circle',
+        symbolSize: 8,
+        silent: true,
+        itemStyle: { color: auroraPalette[6] },
+        data: [{ type: 'max', name: 'max' }],
+        label: { show: false },
+      },
       data: props.data.map((item) => item.target),
     },
   ],

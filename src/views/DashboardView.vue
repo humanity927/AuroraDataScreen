@@ -84,10 +84,24 @@ onBeforeUnmount(() => {
   overflow: hidden;
   color: var(--text-primary);
   background:
-    radial-gradient(circle at 19% 18%, rgba(20, 184, 166, 0.22), transparent 28%),
-    radial-gradient(circle at 76% 8%, rgba(56, 189, 248, 0.18), transparent 24%),
-    radial-gradient(circle at 78% 78%, rgba(167, 139, 250, 0.15), transparent 32%),
-    linear-gradient(135deg, #030a16 0%, #071527 42%, #11102a 100%);
+    radial-gradient(ellipse 88% 62% at 50% -18%, rgba(103, 232, 249, 0.42), transparent 58%),
+    radial-gradient(ellipse 72% 46% at 78% 10%, rgba(165, 180, 252, 0.3), transparent 62%),
+    radial-gradient(ellipse 64% 46% at 14% 18%, rgba(94, 234, 212, 0.26), transparent 60%),
+    linear-gradient(104deg, transparent 4%, rgba(103, 232, 249, 0.24) 22%, transparent 42%),
+    linear-gradient(74deg, transparent 28%, rgba(196, 181, 253, 0.24) 52%, transparent 72%),
+    linear-gradient(18deg, transparent 52%, rgba(253, 230, 138, 0.12) 70%, transparent 88%),
+    conic-gradient(
+      from 212deg at 50% -8%,
+      rgba(103, 232, 249, 0.36),
+      rgba(94, 234, 212, 0.24),
+      rgba(96, 165, 250, 0.22),
+      rgba(165, 180, 252, 0.28),
+      rgba(196, 181, 253, 0.2),
+      rgba(253, 230, 138, 0.12),
+      rgba(103, 232, 249, 0.36)
+    ),
+    linear-gradient(135deg, #020817 0%, #052033 33%, #141a42 62%, #042f3a 100%);
+  background-blend-mode: screen, screen, screen, screen, screen, screen, screen, normal;
 }
 
 .dashboard-screen::before {
@@ -96,12 +110,18 @@ onBeforeUnmount(() => {
   pointer-events: none;
   content: '';
   background-image:
-    linear-gradient(rgba(148, 210, 255, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(148, 210, 255, 0.05) 1px, transparent 1px),
-    linear-gradient(115deg, transparent 18%, rgba(34, 211, 238, 0.12) 34%, transparent 48%),
-    linear-gradient(72deg, transparent 50%, rgba(52, 211, 153, 0.08) 65%, transparent 76%);
-  background-size: 42px 42px;
-  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.18));
+    linear-gradient(rgba(186, 230, 253, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(186, 230, 253, 0.06) 1px, transparent 1px),
+    linear-gradient(108deg, transparent 8%, rgba(103, 232, 249, 0.22) 30%, transparent 54%),
+    linear-gradient(74deg, transparent 30%, rgba(165, 180, 252, 0.2) 58%, transparent 80%),
+    linear-gradient(22deg, transparent 46%, rgba(253, 230, 138, 0.12) 66%, transparent 86%);
+  background-size:
+    42px 42px,
+    42px 42px,
+    100% 100%,
+    100% 100%,
+    100% 100%;
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.92), rgba(0, 0, 0, 0.3));
 }
 
 .dashboard-screen::after {
@@ -109,14 +129,26 @@ onBeforeUnmount(() => {
   inset: 0;
   pointer-events: none;
   content: '';
-  background: repeating-linear-gradient(
-    0deg,
-    rgba(255, 255, 255, 0.025) 0,
-    rgba(255, 255, 255, 0.025) 1px,
-    transparent 1px,
-    transparent 7px
-  );
-  opacity: 0.36;
+  background:
+    linear-gradient(
+      103deg,
+      transparent 7%,
+      rgba(103, 232, 249, 0.24) 20%,
+      transparent 34%,
+      rgba(165, 180, 252, 0.26) 49%,
+      transparent 62%,
+      rgba(94, 234, 212, 0.16) 74%,
+      transparent 88%
+    ),
+    repeating-linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.022) 0,
+      rgba(255, 255, 255, 0.022) 1px,
+      transparent 1px,
+      transparent 7px
+    );
+  mix-blend-mode: screen;
+  opacity: 0.86;
 }
 
 .dashboard-content {
@@ -149,8 +181,9 @@ onBeforeUnmount(() => {
 .center-panel {
   grid-area: center;
   box-shadow:
-    0 0 38px rgba(34, 211, 238, 0.16),
-    inset 0 0 40px rgba(52, 211, 153, 0.08);
+    0 0 42px rgba(103, 232, 249, 0.2),
+    0 0 36px rgba(165, 180, 252, 0.12),
+    inset 0 0 42px rgba(94, 234, 212, 0.08);
 }
 
 .equipment-panel {

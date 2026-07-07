@@ -4,14 +4,15 @@
 
 html {
   min-width: 320px;
-  background: var(--screen-bg);
+  background: #030714;
 }
 
 body {
   min-width: 320px;
   min-height: 100vh;
   margin: 0;
-  font-family: Inter, 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', Arial, sans-serif;
+  font-family: var(--font-body);
+  font-variant-numeric: tabular-nums;
   background: var(--screen-bg);
   overscroll-behavior: none;
 }

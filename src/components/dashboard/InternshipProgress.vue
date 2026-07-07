@@ -48,13 +48,18 @@ defineProps<{
   border: 1px solid rgba(94, 234, 212, 0.24);
   border-radius: 8px;
   background:
-    radial-gradient(circle at top right, rgba(94, 234, 212, 0.16), transparent 40%),
+    linear-gradient(112deg, rgba(34, 211, 238, 0.16), transparent 42%),
+    linear-gradient(248deg, rgba(165, 180, 252, 0.14), transparent 46%),
     rgba(20, 184, 166, 0.08);
 }
 
 .overall-rate strong {
-  color: #5eead4;
+  color: #f8feff;
+  font-family: var(--font-number);
   font-size: 28px;
+  text-shadow:
+    0 0 16px rgba(34, 211, 238, 0.42),
+    0 0 18px rgba(165, 180, 252, 0.18);
 }
 
 .task-list {
@@ -110,7 +115,22 @@ defineProps<{
   display: block;
   height: 100%;
   border-radius: inherit;
-  background: linear-gradient(90deg, #22d3ee, #34d399, #a78bfa);
+  background: linear-gradient(90deg, #67e8f9, #5eead4, #a5b4fc, #c4b5fd);
   box-shadow: 0 0 14px rgba(34, 211, 238, 0.44);
+}
+
+.task-item:nth-child(2) .progress-line span {
+  background: linear-gradient(90deg, #60a5fa, #a5b4fc, #c4b5fd);
+  box-shadow: 0 0 14px rgba(167, 139, 250, 0.42);
+}
+
+.task-item:nth-child(3) .progress-line span {
+  background: linear-gradient(90deg, #5eead4, #a7f3d0, #fde68a);
+  box-shadow: 0 0 14px rgba(167, 243, 208, 0.34);
+}
+
+.task-item:nth-child(4) .progress-line span {
+  background: linear-gradient(90deg, #bae6fd, #a5b4fc, #fde68a);
+  box-shadow: 0 0 14px rgba(165, 180, 252, 0.34);
 }
 </style>
